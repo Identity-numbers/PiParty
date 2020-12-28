@@ -45,7 +45,7 @@ public class CameraMultiTarget : MonoBehaviour
 
         Vector3 velocity = Vector3.zero;
         //transform.position = Vector3.SmoothDamp(transform.position, targetPositionAndRotation.Position, ref velocity, MoveSmoothTime);
-        transform.position = Vector3.SlerpUnclamped(transform.position, targetPositionAndRotation.Position, MoveSmoothTime);
+        transform.position = Vector3.Slerp(transform.position, targetPositionAndRotation.Position, MoveSmoothTime);
         transform.rotation = targetPositionAndRotation.Rotation;
     }
 

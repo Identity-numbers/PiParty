@@ -88,20 +88,38 @@ public class Main : MonoBehaviour {
             ListDigits = new List<int> (constants.PhiDigits);
         }
 
-        for (int i = 1; i < maxTesting; i++) {
+        //testcase between 0-9
+        if (myDropdownTestCase >= 0 && myDropdownTestCase <= 9) {
+            for (int i = 1; i < maxTesting; i++) {
 
-            int digit = ListDigits[i];
-            //make a test criterion
-            if (digit == myDropdownTestCase.value) {
-                //move down one row
-                //change direction
-                digitBoxHandler.oneRowDown (digit, i);
+                int digit = ListDigits[i];
+                //make a test criterion
+                if (digit == myDropdownTestCase.value) {
+                    //move down one row
+                    //change direction
+                    digitBoxHandler.oneRowDown (digit, i);
 
-            } else {
-                digitBoxHandler.addNextNumber (digit, i);
+                } else {
+                    digitBoxHandler.addNextNumber (digit, i);
+                }
             }
+        } else if (myDropdownTestCase > 9 && myDropdownTestCase == 10) {
+            for (int i = 1; i < maxTesting; i++) {
+                //pick up the digit list
+                int digit = ListDigits[i];
+
+                if (digit == 1) {
+
+                } else if (digit == 2) {
+
+                } else if (digit == 3) {
+
+                }
+            }
+
         }
-        SetTargets();
+
+        SetTargets ();
         //Countdown (1);
     }
 
@@ -118,14 +136,14 @@ public class Main : MonoBehaviour {
         //StartCoroutine(Countdown(1));
     }
 
-/*
-    private IEnumerator Countdown (int seconds) {
-        int counter = seconds;
-        while (counter > 0) {
-            yield return new WaitForSeconds (1);
-            counter--;
+    /*
+        private IEnumerator Countdown (int seconds) {
+            int counter = seconds;
+            while (counter > 0) {
+                yield return new WaitForSeconds (1);
+                counter--;
+            }
+            SetTargets ();
         }
-        SetTargets ();
-    }
-    */
+        */
 }
