@@ -99,7 +99,6 @@ public class DigitBoxHandler : MonoBehaviour {
 
     public void MoveUpDown () {
         //toggle dir
-
     }
 
     public void MoveLeftRight () {
@@ -108,5 +107,9 @@ public class DigitBoxHandler : MonoBehaviour {
 
     public void MoveForwBackw () {
         //toggle dir
+    }
+
+    public void ContinueInDirection(){
+        
     }
 }

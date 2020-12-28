@@ -89,7 +89,7 @@ public class Main : MonoBehaviour {
         }
 
         //testcase between 0-9
-        if (myDropdownTestCase >= 0 && myDropdownTestCase <= 9) {
+        if (myDropdownTestCase.value >= 0 && myDropdownTestCase.value <= 9) {
             for (int i = 1; i < maxTesting; i++) {
 
                 int digit = ListDigits[i];
@@ -103,20 +103,21 @@ public class Main : MonoBehaviour {
                     digitBoxHandler.addNextNumber (digit, i);
                 }
             }
-        } else if (myDropdownTestCase > 9 && myDropdownTestCase == 10) {
+        } else if (myDropdownTestCase.value > 9 && myDropdownTestCase.value == 10) {
             for (int i = 1; i < maxTesting; i++) {
                 //pick up the digit list
                 int digit = ListDigits[i];
 
                 if (digit == 1) {
-
+                    digitBoxHandler.MoveUpDown ();
                 } else if (digit == 2) {
-
+                    digitBoxHandler.MoveLeftRight ();
                 } else if (digit == 3) {
-
+                    digitBoxHandler.MoveForwBackw ();
+                }else{
+                    digitBoxHandler.ContinueInDirection();
                 }
             }
-
         }
 
         SetTargets ();
