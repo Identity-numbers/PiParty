@@ -12,13 +12,7 @@ public class Main : MonoBehaviour {
 
     //dropdown menus
     public Dropdown myDropdownConst;
-    // 0 - Pi
-    // 1 - E
-    // 2 - Phi
     public Dropdown myDropdownTestCase;
-    //@1-Row Down and change dir
-    //@2-Row Down and change dir
-    //@3-Row Down and change dir
 
     //max 10000 digits so far
     private int maxTesting = 1500;
@@ -27,18 +21,9 @@ public class Main : MonoBehaviour {
     public Constants constants;
 
     /*
-
     What do I need to do?
-
     Add sqrt2 and perhaps numbers that are known not to be clean
-    move all digit boxes to a parent
-    make a remove function for all digitboxes
-
     add a tool that handles the positioning and spacing of digit boxes
-    add a button for each test criterion
-    a dropdown list for if statements?
-    add a camera so a web user can look at the structure
-
     */
 
     // Start is called before the first frame update
@@ -63,7 +48,8 @@ public class Main : MonoBehaviour {
     }
 
     private void myDropdownValueChangedHandler (Dropdown target) {
-        Debug.Log ("selected: " + target.value);
+        //Debug.Log ("selected: " + target.value);
+        MainFunction ();
     }
 
     public void SetDropdownIndexConst (int index) {
@@ -109,13 +95,13 @@ public class Main : MonoBehaviour {
                 int digit = ListDigits[i];
 
                 if (digit == 1) {
-                    digitBoxHandler.MoveUpDown ();
+                    digitBoxHandler.MoveUpDown (digit);
                 } else if (digit == 2) {
-                    digitBoxHandler.MoveLeftRight ();
+                    digitBoxHandler.MoveLeftRight (digit);
                 } else if (digit == 3) {
-                    digitBoxHandler.MoveForwBackw ();
+                    digitBoxHandler.MoveForwBackw (digit);
                 }else{
-                    digitBoxHandler.ContinueInDirection();
+                    digitBoxHandler.ContinueInDirection(digit);
                 }
             }
         }

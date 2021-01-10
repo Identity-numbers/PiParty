@@ -25,8 +25,8 @@ public class DigitBoxHandler : MonoBehaviour {
 
     // 3D variables ==================================
     private int UpDownDir = 1;
-    private int RightLeft = 1;
-    private int ForwBackW = 1;
+    private int RightLeftDir = 1;
+    private int ForwBackWDir = 1;
 
     private int at3D_CurrX = 0;
     private int at3D_CurrY = 0;
@@ -36,7 +36,7 @@ public class DigitBoxHandler : MonoBehaviour {
     void Start () {
         //reset and set all positions
         ResetStartPosition ();
-        ResetDir3DPositions();
+        ResetDir3DPositions ();
 
         //toggleRotation = toggleRotation.GetComponent<Toggle>();
         toggleRotation.onValueChanged.AddListener (delegate {
@@ -89,27 +89,70 @@ public class DigitBoxHandler : MonoBehaviour {
     }
 
     // 3D functions ==========================================
+    private string LastKnowDirection = "MoveUpDown";
     public void ResetDir3DPositions () {
         at3D_CurrX = startPosx;
         at3D_CurrY = startPosy;
         at3D_CurrZ = startPosz;
 
-        UpDownDir = RightLeft = ForwBackW = 1;
+        UpDownDir = 1;
+        RightLeftDir = 1;
+        ForwBackWDir = 1;
     }
 
-    public void MoveUpDown () {
+    public void MoveUpDown (int digit, bool toggledir = true) {
+        LastKnowDirection = "MoveUpDown";
         //toggle dir
+        if(toggledir){
+            UpDownDir *= -1;
+        }
+        at3D_CurrX -= UpDownDir * gridSize;
+        //instantiate
+        GameObject added = Instantiate (digitBoxes[digit], new Vector3 (at3D_CurrX, at3D_CurrY, at3D_CurrZ), Quaternion.identity);
+        added.transform.SetParent (GOParent.transform);
+        //added.name = added.name + "_" + atIndex;
+        //add to list
+        addedDigitBoxes.Add (added);
     }
 
-    public void MoveLeftRight () {
+    public void MoveLeftRight (int digit, bool toggledir = true) {
+        LastKnowDirection = "MoveLeftRight";
         //toggle dir
+        if(toggledir){
+            RightLeftDir *= -1;
+        }
+        at3D_CurrY -= RightLeftDir * gridSize;
+        //instantiate
+        GameObject added = Instantiate (digitBoxes[digit], new Vector3 (at3D_CurrX, at3D_CurrY, at3D_CurrZ), Quaternion.identity);
+        added.transform.SetParent (GOParent.transform);
+        //added.name = added.name + "_" + atIndex;
+        //add to list
+        addedDigitBoxes.Add (added);
     }
 
-    public void MoveForwBackw () {
+    public void MoveForwBackw (int digit, bool toggledir = true) {
+        LastKnowDirection = "MoveForwBackw";
         //toggle dir
+        if(toggledir){
+            ForwBackWDir *= -1;
+        }
+        at3D_CurrZ -= ForwBackWDir * gridSize;
+        //instantiate
+        GameObject added = Instantiate (digitBoxes[digit], new Vector3 (at3D_CurrX, at3D_CurrY, at3D_CurrZ), Quaternion.identity);
+        added.transform.SetParent (GOParent.transform);
+        //added.name = added.name + "_" + atIndex;
+        //add to list
+        addedDigitBoxes.Add (added);
     }
 
-    public void ContinueInDirection(){
-        
+    public void ContinueInDirection (int digit) {
+        //how does one know the curr direciton?
+        if (LastKnowDirection == "MoveUpDown") {
+            MoveUpDown (digit, false);
+        } else if (LastKnowDirection == "MoveLeftRight") {
+            MoveLeftRight (digit, false);
+        } else if (LastKnowDirection == "MoveForwBackw") {
+            MoveForwBackw (digit, false);
+        }
     }
 }
